@@ -21,11 +21,11 @@ const CARDS = [
 type CardName = (typeof CARDS)[number]['name']
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
-const CARD_W = 264
-const CARD_H = Math.round((264 * 654) / 512) // 337
-const CARD_BASE = -18
-const PILE_W = 78
-const PILE_LEFT = 40
+const CARD_W = 200
+const CARD_H = Math.round((200 * 654) / 512) // 255
+const CARD_BASE = -40
+const PILE_W = 50
+const PILE_LEFT = 24
 const PILE_CENTER = PILE_LEFT + PILE_W / 2
 
 interface CardLayout {
@@ -48,7 +48,7 @@ function computeLayout(
   drawn: number,
   played: CardName[],
 ): { cards: CardLayout[]; cx: number; pileCenter: number } {
-  const spacing = Math.min(140, Math.max(108, containerW / 9))
+  const spacing = Math.min(106, Math.max(82, containerW / 12))
   const cx = containerW / 2
   const anchorLeft = Math.round(cx - CARD_W / 2)
   const dealt = CARDS.slice(0, drawn)
@@ -256,6 +256,7 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
         touchAction: 'none',
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        pointerEvents: 'auto',
       }}
     >
       <div style={{ position: 'absolute', inset: 0, filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.55))' }}>
@@ -319,15 +320,15 @@ export function HeroSection() {
     <div
       ref={containerRef}
       style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '100vh',
-        overflow: 'hidden',
+        position: 'fixed',
+        inset: 0,
+        pointerEvents: 'none',
         fontFamily: "'Cinzel', serif",
+        zIndex: 100,
       }}
     >
       {/* Draw pile — bottom-left */}
-      <div style={{ position: 'absolute', left: '40px', bottom: '48px', width: '78px' }}>
+      <div style={{ position: 'absolute', left: '20px', bottom: '16px', width: '50px', pointerEvents: 'auto' }}>
         <img
           src={drawDeckImg}
           alt="Draw pile"
@@ -343,10 +344,10 @@ export function HeroSection() {
         <div
           style={{
             position: 'absolute',
-            right: '-14px',
-            bottom: '-12px',
-            width: '46px',
-            height: '46px',
+            right: '-10px',
+            bottom: '-8px',
+            width: '30px',
+            height: '30px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -356,7 +357,7 @@ export function HeroSection() {
         >
           <span
             style={{
-              font: "800 18px 'Cinzel', serif",
+              font: "800 12px 'Cinzel', serif",
               color: '#fff',
               textShadow: '0 1px 2px rgba(0,0,0,.55)',
               transform: 'translateY(-1px)',
@@ -369,7 +370,7 @@ export function HeroSection() {
       </div>
 
       {/* Discard pile — bottom-right */}
-      <div style={{ position: 'absolute', right: '40px', bottom: '48px', width: '78px' }}>
+      <div style={{ position: 'absolute', right: '20px', bottom: '16px', width: '50px', pointerEvents: 'auto' }}>
         <img
           src={discardDeckImg}
           alt="Discard pile"
@@ -385,10 +386,10 @@ export function HeroSection() {
         <div
           style={{
             position: 'absolute',
-            left: '-14px',
-            bottom: '-12px',
-            width: '46px',
-            height: '46px',
+            left: '-10px',
+            bottom: '-8px',
+            width: '30px',
+            height: '30px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -398,7 +399,7 @@ export function HeroSection() {
         >
           <span
             style={{
-              font: "800 18px 'Cinzel', serif",
+              font: "800 12px 'Cinzel', serif",
               color: '#fff',
               textShadow: '0 1px 2px rgba(0,0,0,.55)',
               transform: 'translateY(-1px)',
