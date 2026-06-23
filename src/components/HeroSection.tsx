@@ -21,8 +21,8 @@ const CARDS = [
 type CardName = (typeof CARDS)[number]['name']
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
-const CARD_W = 200
-const CARD_H = Math.round((200 * 654) / 512) // 255
+const CARD_W = 220
+const CARD_H = Math.round((CARD_W * 654) / 512) // 255
 const CARD_BASE = -40
 const PILE_W = 50
 const PILE_LEFT = 24
