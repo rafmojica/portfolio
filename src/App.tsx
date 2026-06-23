@@ -1,12 +1,12 @@
 import { HeroSection } from './components/HeroSection'
+import { HeroBackdrop } from './components/HeroBackdrop'
 
 function App() {
   return (
     <>
-      <HeroSection />
-
-      <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h1 style={{ color: '#fff' }}>Home</h1>
+      <section id="home" style={{ position: 'relative' }}>
+        <HeroBackdrop />
+        <HeroSection />
       </section>
       <section id="about" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <h1 style={{ color: '#fff' }}>About</h1>
