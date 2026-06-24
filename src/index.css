@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Rubik:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Kreon:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  margin: 0;
+  padding: 0;
+  scroll-padding-top: 62px;
+}
+
+body {
   margin: 0;
   padding: 0;
 }
@@ -23,4 +29,32 @@ body {
 
 h1, h2, h3 {
   margin: 0;
+}
+
+@keyframes aboutGlow {
+  0%, 100% { opacity: .55; transform: translate(-50%, 0) scale(1); }
+  50%       { opacity: .85; transform: translate(-50%, 0) scale(1.06); }
+}
+
+@keyframes aboutEmber {
+  0%   { transform: translateY(0) scale(1);   opacity: 0; }
+  15%  { opacity: .7; }
+  100% { transform: translateY(-160px) scale(.4); opacity: 0; }
+}
+
+.about-glow {
+  animation: aboutGlow 7s ease-in-out infinite;
+}
+
+.about-ember {
+  animation: aboutEmber ease-in infinite;
+}
+
+.nav-link {
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.nav-link:hover {
+  border-color: rgba(243,196,90,.55) !important;
+  color: #f3c45a !important;
+  background: rgba(243,196,90,.1) !important;
 }

@@ -37,7 +37,7 @@ export function HeroBackdrop() {
           gap: 48,
           maxWidth: 1180,
           margin: '0 auto',
-          padding: '96px 56px 380px',
+          padding: '132px 56px 380px',
           pointerEvents: 'none',
         }}
       >
