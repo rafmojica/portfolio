@@ -9,10 +9,10 @@ export function HeroBackdrop() {
         minHeight: '100vh',
         overflow: 'hidden',
         background: 'linear-gradient(180deg, #121217 0%, #0f0f13 55%, #0b0b0e 100%)',
-        fontFamily: "'Rubik', sans-serif",
+        fontFamily: "'Kreon', serif",
       }}
     >
-      {/* Bottom fade — darkens the lower area for the card hand to read against */}
+      {/* Bottom fade */}
       <div
         style={{
           position: 'absolute',
@@ -37,7 +37,7 @@ export function HeroBackdrop() {
           gap: 48,
           maxWidth: 1180,
           margin: '0 auto',
-          padding: '132px 56px 380px',
+          padding: '124px 56px 380px',
           pointerEvents: 'none',
         }}
       >
@@ -63,18 +63,23 @@ export function HeroBackdrop() {
             style={{
               position: 'relative',
               zIndex: 1,
-              padding: '18px 36px 0px 90px',
+              padding: '18px 36px 22px 60px',
               textAlign: 'left',
             }}
           >
             <h1
               style={{
                 margin: 0,
-                fontWeight: 600,
-                fontSize: 'clamp(44px, 6.6vw, 70px)',
-                lineHeight: 1.02,
-                letterSpacing: -1,
-                color: '#322c46',
+                fontFamily: "'Cinzel', serif",
+                fontWeight: 700,
+                fontSize: 'clamp(38px, 5.4vw, 66px)',
+                lineHeight: 1.04,
+                letterSpacing: '.5px',
+                background: 'linear-gradient(180deg, #4a4266 6%, #322c46 52%, #241c38 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                filter: 'drop-shadow(0 1px 0 rgba(255,255,255,.5)) drop-shadow(0 3px 7px rgba(40,28,60,.28))',
               }}
             >
               Rafa&nbsp;Mojica
@@ -82,20 +87,22 @@ export function HeroBackdrop() {
             <div
               style={{
                 marginTop: 22,
-                fontSize: 14,
-                fontWeight: 500,
-                letterSpacing: '.4px',
+                fontFamily: "'Cinzel', serif",
+                fontSize: 12,
+                fontWeight: 600,
+                letterSpacing: '2.5px',
+                textTransform: 'uppercase',
                 color: '#6c6685',
               }}
             >
-              aspiring full-stack engineer
+              Aspiring Full-Stack Engineer
             </div>
             <p
               style={{
-                margin: '12px 0 0',
+                margin: '14px 0 0',
                 maxWidth: 400,
                 fontSize: 'clamp(16px, 1.8vw, 18px)',
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 color: '#433c5b',
                 textWrap: 'pretty' as React.CSSProperties['textWrap'],
               }}
@@ -128,7 +135,7 @@ export function HeroBackdrop() {
                 justifyContent: 'center',
                 color: 'rgba(255,255,255,.18)',
                 fontSize: 13,
-                fontWeight: 500,
+                fontFamily: "'Kreon', serif",
                 letterSpacing: '.5px',
               }}
             >
