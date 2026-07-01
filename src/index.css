@@ -50,6 +50,48 @@ h1, h2, h3 {
   animation: aboutEmber ease-in infinite;
 }
 
+@keyframes bossPing {
+  0%   { transform: scale(.9);  opacity: .7; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes popIn {
+  from { transform: translate(-50%, -48%) scale(.94); opacity: 0; }
+  to   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+}
+
+.proj-frame {
+  transition: transform .18s ease, border-color .18s ease;
+}
+.proj-frame:hover {
+  transform: scale(1.06);
+  border-color: rgba(231,220,196,.45) !important;
+}
+
+.proj-close {
+  transition: all .15s ease;
+}
+.proj-close:hover {
+  background: rgba(236,222,194,.18) !important;
+  color: #fff !important;
+}
+
+.proj-btn-github {
+  transition: all .15s ease;
+}
+.proj-btn-github:hover {
+  background: rgba(240,223,174,.22) !important;
+}
+
+.proj-btn-demo {
+  transition: all .15s ease;
+}
+.proj-btn-demo:hover {
+  border-color: rgba(240,223,174,.5) !important;
+  color: #f0dfae !important;
+}
+
 .nav-link {
   transition: border-color .18s ease, color .18s ease, background .18s ease;
 }

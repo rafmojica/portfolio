@@ -2,6 +2,7 @@ import { Navbar } from './components/Navbar'
 import { HeroSection } from './components/HeroSection'
 import { HeroBackdrop } from './components/HeroBackdrop'
 import { AboutSection } from './components/AboutSection'
+import { ProjectsSection } from './components/ProjectsSection'
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
       <section id="tech" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <h1 style={{ color: '#fff' }}>Tech Stack</h1>
       </section>
-      <section id="projects" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h1 style={{ color: '#fff' }}>Projects</h1>
+      <section id="projects">
+        <ProjectsSection />
       </section>
       <section id="contact" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <h1 style={{ color: '#fff' }}>Contact</h1>
