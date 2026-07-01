@@ -24,6 +24,7 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 const CARD_W = 220
 const CARD_H = Math.round((CARD_W * 654) / 512) // 255
 const CARD_BASE = -40
+const HOVER_SHIFT = 48
 const PILE_W = 50
 const PILE_LEFT = 24
 const PILE_CENTER = PILE_LEFT + PILE_W / 2
@@ -39,6 +40,7 @@ interface CardLayout {
   x: number
   arcY: number
   rot: number
+  shift: number
   z: number
   inHand: boolean
 }
@@ -47,6 +49,7 @@ function computeLayout(
   containerW: number,
   drawn: number,
   played: CardName[],
+  hovered: CardName | null,
 ): { cards: CardLayout[]; cx: number; pileCenter: number } {
   const spacing = Math.min(106, Math.max(82, containerW / 12))
   const cx = containerW / 2
@@ -56,19 +59,23 @@ function computeLayout(
   const m = hand.length
   const slot: Partial<Record<CardName, number>> = {}
   hand.forEach((c, i) => { slot[c.name] = i })
+  const hoverSlot = hovered != null ? slot[hovered] : undefined
 
   const cards: CardLayout[] = dealt.map(c => {
     const slotIdx = slot[c.name]
     const inHand = slotIdx !== undefined
-    let x = 0, arcY = 0, rot = 0
+    let x = 0, arcY = 0, rot = 0, shift = 0
     if (inHand && slotIdx !== undefined) {
       const off = slotIdx - (m - 1) / 2
       x = Math.round(off * spacing)
       rot = off * 6
       arcY = Math.round(off * off * 15)
+      if (hoverSlot !== undefined && slotIdx !== hoverSlot) {
+        shift = slotIdx < hoverSlot ? -HOVER_SHIFT : HOVER_SHIFT
+      }
     }
     const z = CARDS.findIndex(cc => cc.name === c.name) + 1
-    return { ...c, cw: CARD_W, ch: CARD_H, base: CARD_BASE, anchorLeft, x, arcY, rot, z, inHand }
+    return { ...c, cw: CARD_W, ch: CARD_H, base: CARD_BASE, anchorLeft, x, arcY, rot, shift, z, inHand }
   })
 
   return { cards, cx, pileCenter: PILE_CENTER }
@@ -83,9 +90,10 @@ interface CardProps {
   containerH: number
   onPlay: (name: string) => void
   onDiscard: () => void
+  onHover: (name: string | null) => void
 }
 
-function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProps) {
+function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard, onHover }: CardProps) {
   const ref = useRef<HTMLDivElement>(null)
   const dragRef = useRef<{
     px: number; py: number; sx: number; sy: number
@@ -96,11 +104,13 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
 
   const mvX = useMotionValue(fromX)
   const mvY = useMotionValue(0)
+  const shiftX = useMotionValue(0)
   const rot = useMotionValue(0)
   const tilt = useMotionValue(0)
   const scale = useMotionValue(1)
   const opacity = useMotionValue(1)
   const rotate = useTransform([rot, tilt], (v: number[]) => v[0] + v[1])
+  const x = useTransform([mvX, shiftX], (v: number[]) => v[0] + v[1])
   const [z, setZ] = useState(cd.z)
 
   const busy = () => {
@@ -111,7 +121,6 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
   // Deal-in on first mount; re-center when the fan layout changes.
   // Motion values (mvX, mvY, rot, scale, opacity) and refs (mounted) are stable —
   // intentionally omitted from deps.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (busy()) return
     const first = !mounted.current
@@ -126,11 +135,19 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
       animate(mvY, cd.arcY, { duration: 0.9, ease: EASE })
       animate(rot, cd.rot, { duration: 0.9, ease: EASE })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cd.x, cd.arcY, cd.rot])
+
+  // Ease aside when a neighbor is hovered; additive so it never fights the
+  // fan/drag animations on mvX.
+  useEffect(() => {
+    animate(shiftX, cd.shift, { duration: 0.45, ease: EASE })
+  }, [cd.shift, shiftX])
 
   const onEnter = () => {
     if (status.current !== 'idle') return
     status.current = 'hover'
+    onHover(cd.name)
     setZ(50)
     mvX.stop(); mvY.stop(); rot.stop(); scale.stop()
     mvY.set(-18); rot.set(0); tilt.set(0); scale.set(1.3)
@@ -139,6 +156,7 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
   const onLeave = () => {
     if (status.current !== 'hover') return
     status.current = 'idle'
+    onHover(null)
     setZ(cd.z)
     animate(mvY, cd.arcY, { duration: 0.75, ease: EASE })
     animate(rot, cd.rot, { duration: 0.75, ease: EASE })
@@ -174,6 +192,7 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
     e.preventDefault()
     try { ref.current?.setPointerCapture(e.pointerId) } catch (_) { /* ignore */ }
     status.current = 'dragging'
+    onHover(null)
     setZ(80)
     mvX.stop(); mvY.stop(); rot.stop(); scale.stop()
     animate(scale, 1.12, { duration: 0.12, ease: EASE })
@@ -246,7 +265,7 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard }: CardProp
         width: cd.cw + 'px',
         height: cd.ch + 'px',
         transformOrigin: 'bottom center',
-        x: mvX,
+        x,
         y: mvY,
         rotate,
         scale,
@@ -285,6 +304,7 @@ export function HeroSection() {
   const [size, setSize] = useState({ w: 0, h: 0 })
   const [drawn, setDrawn] = useState(0)
   const [played, setPlayed] = useState<CardName[]>([])
+  const [hovered, setHovered] = useState<CardName | null>(null)
   const [discarded, setDiscarded] = useState(0)
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
@@ -307,13 +327,18 @@ export function HeroSection() {
 
   const onPlay = useCallback((name: string) => {
     setPlayed(p => (p.includes(name as CardName) ? p : [...p, name as CardName]))
+    setHovered(h => (h === name ? null : h))
   }, [])
 
   const onDiscard = useCallback(() => {
     setDiscarded(d => d + 1)
   }, [])
 
-  const { cards } = computeLayout(size.w || 1280, drawn, played)
+  const onHover = useCallback((name: string | null) => {
+    setHovered(name as CardName | null)
+  }, [])
+
+  const { cards } = computeLayout(size.w || 1280, drawn, played, hovered)
   const fromX = -(size.w / 2 + CARD_W)
 
   return (
@@ -422,6 +447,7 @@ export function HeroSection() {
             containerH={size.h}
             onPlay={onPlay}
             onDiscard={onDiscard}
+            onHover={onHover}
           />
         ))}
     </div>
