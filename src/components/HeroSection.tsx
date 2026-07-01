@@ -89,7 +89,7 @@ interface CardProps {
   containerW: number
   containerH: number
   onPlay: (name: string) => void
-  onDiscard: () => void
+  onDiscard: (name: string) => void
   onHover: (name: string | null) => void
 }
 
@@ -182,7 +182,7 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard, onHover }:
       ease: [0.5, 0, 0.7, 1] as [number, number, number, number],
     })
     animate(opacity, [1, 1, 0], { duration: 0.72, times: [0, 0.8, 1], ease: 'easeIn' }).then(() => {
-      onDiscard()
+      onDiscard(cd.name)
     })
   }, [containerW, cd, mvX, mvY, rot, tilt, scale, opacity, onDiscard])
 
@@ -305,7 +305,9 @@ export function HeroSection() {
   const [drawn, setDrawn] = useState(0)
   const [played, setPlayed] = useState<CardName[]>([])
   const [hovered, setHovered] = useState<CardName | null>(null)
-  const [discarded, setDiscarded] = useState(0)
+  const [discardPile, setDiscardPile] = useState<CardName[]>([])
+  const [gen, setGen] = useState<Record<string, number>>({})
+  const playedRef = useRef<CardName[]>([])
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
@@ -325,13 +327,31 @@ export function HeroSection() {
     return () => { timersRef.current.forEach(clearTimeout) }
   }, [])
 
+  // Playing a card recalls the previously played one: dropping it from
+  // `played` puts it back in the hand, and bumping its generation remounts it
+  // so it deals in from the left like the opening draw.
   const onPlay = useCallback((name: string) => {
-    setPlayed(p => (p.includes(name as CardName) ? p : [...p, name as CardName]))
+    const card = name as CardName
+    const returning = playedRef.current.filter(n => n !== card)
+    playedRef.current = [card]
+    setPlayed([card])
+    if (returning.length) {
+      setGen(g => {
+        const next = { ...g }
+        returning.forEach(n => { next[n] = (next[n] ?? 0) + 1 })
+        return next
+      })
+      setDiscardPile(d => d.filter(n => !returning.includes(n)))
+    }
     setHovered(h => (h === name ? null : h))
   }, [])
 
-  const onDiscard = useCallback(() => {
-    setDiscarded(d => d + 1)
+  const onDiscard = useCallback((name: string) => {
+    const card = name as CardName
+    // A card recalled to the hand mid-dive still resolves its animation —
+    // don't let it land in the pile.
+    if (!playedRef.current.includes(card)) return
+    setDiscardPile(d => (d.includes(card) ? d : [...d, card]))
   }, [])
 
   const onHover = useCallback((name: string | null) => {
@@ -431,7 +451,7 @@ export function HeroSection() {
               display: 'block',
             }}
           >
-            {discarded}
+            {discardPile.length}
           </span>
         </div>
       </div>
@@ -440,7 +460,7 @@ export function HeroSection() {
       {size.w > 0 &&
         cards.map(cd => (
           <Card
-            key={cd.name}
+            key={`${cd.name}-${gen[cd.name] ?? 0}`}
             cd={cd}
             fromX={fromX}
             containerW={size.w}
