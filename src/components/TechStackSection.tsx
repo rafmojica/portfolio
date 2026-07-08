@@ -19,8 +19,8 @@ import f11 from '../assets/chest/half/f11.png'
 // f11's resting spot is hand-tuned; frames 2–10 blend linearly from the closed frame (which must
 // stay registered to the base) into it, so re-tuning f11 means re-spreading the delta here.
 const FRAME_DEFS = [
-  { src: f01, left: 150, top: 355, width: 499, z: 3 },
-  { src: f04, left: 148, top: 336, width: 495, z: 3 },
+  { src: f01, left: 150, top: 345, width: 499, z: 3 },
+  { src: f04, left: 152, top: 340, width: 495, z: 3 },
   { src: f05, left: 157, top: 332, width: 489, z: 3 },
   { src: f06, left: 159, top: 315, width: 484, z: 3 },
   { src: f07, left: 172, top: 279, width: 482, z: 1 },
