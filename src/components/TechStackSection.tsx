@@ -19,16 +19,16 @@ import f11 from '../assets/chest/half/f11.png'
 // f11's resting spot is hand-tuned; frames 2–10 blend linearly from the closed frame (which must
 // stay registered to the base) into it, so re-tuning f11 means re-spreading the delta here.
 const FRAME_DEFS = [
-  { src: f01, left: 154, top: 355, width: 499, z: 3 },
-  { src: f04, left: 148, top: 336, width: 495, z: 1 },
-  { src: f05, left: 157, top: 332, width: 489, z: 1 },
-  { src: f06, left: 165, top: 339, width: 484, z: 1 },
-  { src: f07, left: 172, top: 302, width: 482, z: 1 },
-  { src: f08, left: 181, top: 278, width: 476, z: 1 },
-  { src: f09, left: 188, top: 253, width: 473, z: 1 },
-  { src: f02, left: 206, top: 237, width: 456, z: 1 },
-  { src: f03, left: 215, top: 214, width: 441, z: 1 },
-  { src: f10, left: 227, top: 201, width: 428, z: 1 },
+  { src: f01, left: 150, top: 355, width: 499, z: 3 },
+  { src: f04, left: 148, top: 336, width: 495, z: 3 },
+  { src: f05, left: 157, top: 332, width: 489, z: 3 },
+  { src: f06, left: 159, top: 315, width: 484, z: 3 },
+  { src: f07, left: 172, top: 279, width: 482, z: 1 },
+  { src: f08, left: 181, top: 258, width: 476, z: 1 },
+  { src: f09, left: 188, top: 240, width: 473, z: 1 },
+  { src: f02, left: 206, top: 220, width: 456, z: 1 },
+  { src: f03, left: 215, top: 205, width: 441, z: 1 },
+  { src: f10, left: 235, top: 195, width: 428, z: 1 },
   { src: f11, left: 228, top: 200, width: 432, z: 1 },
 ]
 
@@ -44,13 +44,13 @@ const STAGE_SCALE = 0.7
 
 // x/y are the landing spots (top-left of each 92px hit box), two rows above the chest
 const TECHS: { name: string; slug: string; aura: 'gold' | 'blue' | null; x: number; y: number }[] = [
-  { name: 'React',      slug: 'react',      aura: 'gold', x: 270, y: 100 },
-  { name: 'JavaScript', slug: 'javascript', aura: 'gold', x: 400, y: 100 },
-  { name: 'Python',     slug: 'python',     aura: 'gold', x: 530, y: 100 },
-  { name: 'TypeScript', slug: 'typescript', aura: 'blue', x: 205, y: 215 },
-  { name: 'Java',       slug: 'java',       aura: 'blue', x: 335, y: 215 },
-  { name: 'Git',        slug: 'git',        aura: null,   x: 465, y: 215 },
-  { name: 'Node.js',    slug: 'nodejs',     aura: null,   x: 595, y: 215 },
+  { name: 'React',      slug: 'react',      aura: 'gold', x: 270, y: 200 },
+  { name: 'JavaScript', slug: 'javascript', aura: 'gold', x: 400, y: 200 },
+  { name: 'Python',     slug: 'python',     aura: 'gold', x: 530, y: 200 },
+  { name: 'TypeScript', slug: 'typescript', aura: 'blue', x: 205, y: 315 },
+  { name: 'Java',       slug: 'java',       aura: 'blue', x: 335, y: 315 },
+  { name: 'Git',        slug: 'git',        aura: null,   x: 465, y: 315 },
+  { name: 'Node.js',    slug: 'nodejs',     aura: null,   x: 595, y: 315 },
 ]
 
 // stage point the icons fly out of / return to
@@ -59,7 +59,7 @@ const MOUTH = { x: 400, y: 460 }
 const iconUrl = (slug: string) =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-original.svg`
 
-export function TechStackSection({ autoOpen = true, openSpeedMs = 70 }: { autoOpen?: boolean; openSpeedMs?: number } = {}) {
+export function TechStackSection({ autoOpen = false, openSpeedMs = 70 }: { autoOpen?: boolean; openSpeedMs?: number } = {}) {
   const [frame, setFrame] = useState(0)
   const [open, setOpen] = useState(false)
   const [playing, setPlaying] = useState(false)
@@ -257,7 +257,7 @@ export function TechStackSection({ autoOpen = true, openSpeedMs = 70 }: { autoOp
           left: 158,
           top: 240,
           width: 463,
-          zIndex: 1,
+          zIndex: 3,
           pointerEvents: 'none',
           opacity: frame >= 8 ? 0.75 : 0,
           transition: 'opacity .6s ease',
