@@ -92,6 +92,26 @@ h1, h2, h3 {
   color: #f0dfae !important;
 }
 
+@keyframes glowPulse {
+  0%, 100% { opacity: .75; }
+  50%      { opacity: 1; }
+}
+
+@keyframes hintBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+@keyframes rareGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255,205,90,.8)) drop-shadow(0 0 16px rgba(255,180,40,.5)); }
+  50%      { filter: drop-shadow(0 0 11px rgba(255,220,120,1)) drop-shadow(0 0 28px rgba(255,190,60,.75)); }
+}
+
+@keyframes uncommonGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(110,190,255,.8)) drop-shadow(0 0 16px rgba(70,150,240,.5)); }
+  50%      { filter: drop-shadow(0 0 11px rgba(140,210,255,1)) drop-shadow(0 0 28px rgba(90,170,255,.75)); }
+}
+
 .nav-link {
   transition: border-color .18s ease, color .18s ease, background .18s ease;
 }
