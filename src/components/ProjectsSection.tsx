@@ -7,6 +7,16 @@ import popupImg from '../assets/popup.png'
 const GLOW_BOSS = true
 const SHOW_MARKER = true
 
+// Compact presentation: the hand-placed 640×800 node coordinates stay intact —
+// the whole parchment block (bg + canvas + its breathing room) scales down as one
+// unit, same trick as the chest stage. In-map fonts are bumped up so they still
+// read at the rendered size.
+const MAP_W = 920
+const MAP_PAD_TOP = 64
+const MAP_PAD_BOTTOM = 96
+const MAP_H = MAP_PAD_TOP + 800 + MAP_PAD_BOTTOM
+const MAP_SCALE = 0.7
+
 interface Project {
   floor: string
   name: string
@@ -71,7 +81,7 @@ export function ProjectsSection() {
       overflow: 'hidden',
       fontFamily: "'Kreon', serif",
       background: 'linear-gradient(180deg, #121217 0%, #0f0f13 55%, #0b0b0e 100%)',
-      padding: '80px 32px 90px',
+      padding: '56px 24px 24px',
     }}>
 
       {/* Bottom vignette */}
@@ -86,13 +96,13 @@ export function ProjectsSection() {
       }} />
 
       {/* Heading */}
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginBottom: 38 }}>
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginBottom: 22 }}>
         <div style={{ font: "600 13px 'Cinzel', serif", letterSpacing: '5px', color: '#8b7fb8' }}>
           THE&nbsp;CLIMB&nbsp;SO&nbsp;FAR
         </div>
         <h1 style={{
-          margin: '10px 0 0',
-          font: "800 clamp(42px,6vw,72px) 'Cinzel', serif",
+          margin: '8px 0 0',
+          font: "800 clamp(32px,4.5vw,50px) 'Cinzel', serif",
           lineHeight: 1,
           letterSpacing: '1px',
           background: 'linear-gradient(180deg, #f7efd9 8%, #e2d5b0 50%, #bfae83 100%)',
@@ -103,14 +113,15 @@ export function ProjectsSection() {
         }}>
           Projects
         </h1>
-        <div style={{ width: 160, height: 3, margin: '18px auto 0', background: 'linear-gradient(90deg, transparent, #8b7fb8, transparent)' }} />
-        <p style={{ margin: '16px auto 0', maxWidth: 420, fontSize: 17, lineHeight: 1.6, color: '#9d97b5', textWrap: 'pretty' }}>
+        <div style={{ width: 160, height: 3, margin: '12px auto 0', background: 'linear-gradient(90deg, transparent, #8b7fb8, transparent)' }} />
+        <p style={{ margin: '10px auto 0', maxWidth: 420, fontSize: 16, lineHeight: 1.5, color: '#9d97b5', textWrap: 'pretty' }}>
           Every floor is a project. Inspect a node to read the tale.
         </p>
       </div>
 
-      {/* Parchment map */}
-      <div style={{ position: 'relative', zIndex: 2, width: 920, maxWidth: '100%', margin: '0 auto', padding: '64px 0 96px' }}>
+      {/* Parchment map — scaled footprint; inside it the original 920-wide coordinate space, untouched */}
+      <div style={{ position: 'relative', zIndex: 2, width: MAP_W * MAP_SCALE, height: MAP_H * MAP_SCALE, maxWidth: '100%', margin: '0 auto' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: MAP_W, padding: `${MAP_PAD_TOP}px 0 ${MAP_PAD_BOTTOM}px`, transform: `scale(${MAP_SCALE})`, transformOrigin: 'top left' }}>
         <img
           src={mapBgImg}
           alt=""
@@ -143,8 +154,8 @@ export function ProjectsSection() {
           {/* YOU ARE HERE marker */}
           {SHOW_MARKER && (
             <div style={{ position: 'absolute', left: 250, top: 758, transform: 'translate(-50%, 0)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
-              <img src={markerImg} alt="" draggable={false} style={{ width: 26, height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,.6))' }} />
-              <span style={{ font: "600 10px 'Cinzel', serif", letterSpacing: '2px', color: '#6c6685' }}>YOU&nbsp;ARE&nbsp;HERE</span>
+              <img src={markerImg} alt="" draggable={false} style={{ width: 34, height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,.6))' }} />
+              <span style={{ font: "600 13px 'Cinzel', serif", letterSpacing: '2px', color: '#6c6685' }}>YOU&nbsp;ARE&nbsp;HERE</span>
             </div>
           )}
 
@@ -190,13 +201,13 @@ export function ProjectsSection() {
                     src={p.screenshot}
                     alt={p.name}
                     draggable={false}
-                    style={{ display: 'block', width: 188, height: 118, borderRadius: 7, objectFit: 'cover', userSelect: 'none' }}
+                    style={{ display: 'block', width: 200, height: 125, borderRadius: 7, objectFit: 'cover', userSelect: 'none' }}
                   />
                 ) : (
                   // Screenshot placeholder — swap for <img> once real captures exist
                   <div style={{
-                    width: 188,
-                    height: 118,
+                    width: 200,
+                    height: 125,
                     borderRadius: 7,
                     background: 'linear-gradient(135deg, rgba(40,38,52,.7), rgba(18,17,24,.85))',
                     border: '1px dashed rgba(155,145,190,.22)',
@@ -204,7 +215,7 @@ export function ProjectsSection() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'rgba(155,145,190,.35)',
-                    fontSize: 12,
+                    fontSize: 15,
                     letterSpacing: '.5px',
                   }}>
                     screenshot
@@ -213,17 +224,18 @@ export function ProjectsSection() {
               </div>
 
               {/* Name + blurb */}
-              <div onClick={() => setOpenIdx(i)} style={{ width: 190, flex: 'none', cursor: 'pointer', textAlign: p.align }}>
-                <div style={{ font: "700 19px 'Cinzel', serif", color: '#322c46', textShadow: '0 1px 0 rgba(255,255,255,.3)' }}>
+              <div onClick={() => setOpenIdx(i)} style={{ width: 200, flex: 'none', cursor: 'pointer', textAlign: p.align }}>
+                <div style={{ font: "700 24px 'Cinzel', serif", color: '#322c46', textShadow: '0 1px 0 rgba(255,255,255,.3)' }}>
                   {p.name}
                 </div>
-                <div style={{ marginTop: 2, fontSize: 13, color: '#5a5470' }}>
+                <div style={{ marginTop: 3, fontSize: 17, color: '#5a5470' }}>
                   {p.blurb}
                 </div>
               </div>
             </div>
           ))}
         </div>
+      </div>
       </div>
 
       {/* Detail popup */}

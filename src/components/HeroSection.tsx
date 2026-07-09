@@ -91,9 +91,10 @@ interface CardProps {
   onPlay: (name: string) => void
   onDiscard: (name: string) => void
   onHover: (name: string | null) => void
+  onClickHint: () => void
 }
 
-function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard, onHover }: CardProps) {
+function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard, onHover, onClickHint }: CardProps) {
   const ref = useRef<HTMLDivElement>(null)
   const dragRef = useRef<{
     px: number; py: number; sx: number; sy: number
@@ -229,8 +230,11 @@ function Card({ cd, fromX, containerW, containerH, onPlay, onDiscard, onHover }:
     try { ref.current?.releasePointerCapture(d.pid) } catch (_) { /* ignore */ }
     animate(tilt, 0, { duration: 0.3, ease: EASE })
     const releaseY = e.clientY
+    // barely moved = a click, not a drag — never plays, just nudges the user
+    const isClick = Math.hypot(e.clientX - d.px, e.clientY - d.py) < 8
     dragRef.current = null
-    const isPlayed = releaseY < (containerH || window.innerHeight) * 0.66
+    const isPlayed = !isClick && releaseY < (containerH || window.innerHeight) * 0.66
+    if (isClick) onClickHint()
     if (isPlayed) {
       status.current = 'played'
       setZ(80)
@@ -307,8 +311,10 @@ export function HeroSection() {
   const [hovered, setHovered] = useState<CardName | null>(null)
   const [discardPile, setDiscardPile] = useState<CardName[]>([])
   const [gen, setGen] = useState<Record<string, number>>({})
+  const [hintGen, setHintGen] = useState(0) // 0 = hidden; bumping remounts the box so the animation restarts
   const playedRef = useRef<CardName[]>([])
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
+  const hintTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     const el = containerRef.current
@@ -357,6 +363,14 @@ export function HeroSection() {
   const onHover = useCallback((name: string | null) => {
     setHovered(name as CardName | null)
   }, [])
+
+  const onClickHint = useCallback(() => {
+    setHintGen(g => g + 1)
+    clearTimeout(hintTimerRef.current)
+    hintTimerRef.current = setTimeout(() => setHintGen(0), 2800)
+  }, [])
+
+  useEffect(() => () => clearTimeout(hintTimerRef.current), [])
 
   const { cards } = computeLayout(size.w || 1280, drawn, played, hovered)
   const fromX = -(size.w / 2 + CARD_W)
@@ -468,8 +482,37 @@ export function HeroSection() {
             onPlay={onPlay}
             onDiscard={onDiscard}
             onHover={onHover}
+            onClickHint={onClickHint}
           />
         ))}
+
+      {/* Drag hint — shown when a card is clicked instead of dragged */}
+      {hintGen > 0 && (
+        <div
+          key={hintGen}
+          style={{
+            position: 'fixed',
+            left: '50%',
+            top: '42%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 120,
+            padding: '10px 20px',
+            background: 'rgba(12,16,20,.85)',
+            border: '1px solid rgba(243,196,90,.4)',
+            borderRadius: 6,
+            boxShadow: '0 10px 26px rgba(0,0,0,.45)',
+            font: "600 14px 'Kreon', serif",
+            letterSpacing: '.4px',
+            color: '#ecdec2',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none',
+            animation: 'dragHintFade 2.8s ease forwards',
+          }}
+        >
+          Drag the card to the center of the screen to play it
+        </div>
+      )}
     </div>
   )
 }
