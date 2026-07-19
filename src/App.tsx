@@ -4,6 +4,7 @@ import { HeroBackdrop } from './components/HeroBackdrop'
 import { AboutSection } from './components/AboutSection'
 import { ProjectsSection } from './components/ProjectsSection'
 import { TechStackSection } from './components/TechStackSection'
+import { ContactSection } from './components/ContactSection'
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
       <section id="projects">
         <ProjectsSection />
       </section>
-      <section id="contact" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h1 style={{ color: '#fff' }}>Contact</h1>
+      <section id="contact">
+        <ContactSection />
       </section>
     </>
   )
