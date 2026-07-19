@@ -8,7 +8,7 @@ import contactCardImg from '../assets/option_contact.png'
 import linkedinCardImg from '../assets/option_linkedin.png'
 
 const EMAIL = 'rafamojica@berkeley.edu'
-const LINKEDIN_URL = 'https://www.linkedin.com/in/rafmojica'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/rafa-mojica/'
 
 export function ContactSection() {
   return (
