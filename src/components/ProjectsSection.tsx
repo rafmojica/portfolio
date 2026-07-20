@@ -15,7 +15,8 @@ const MAP_W = 920
 const MAP_PAD_TOP = 64
 const MAP_PAD_BOTTOM = 96
 const MAP_H = MAP_PAD_TOP + 800 + MAP_PAD_BOTTOM
-const MAP_SCALE = 0.7
+// Same responsive scaling as TechStackSection.
+const calcMapScale = () => Math.min(0.9, Math.max(0.75, window.innerWidth / 2133))
 
 interface Project {
   floor: string
@@ -63,6 +64,13 @@ const PROJECTS: Project[] = [
 export function ProjectsSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null)
   const sel = openIdx == null ? null : PROJECTS[openIdx]
+
+  const [mapScale, setMapScale] = useState(calcMapScale)
+  useEffect(() => {
+    const onResize = () => setMapScale(calcMapScale())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   useEffect(() => {
     if (openIdx == null) return
@@ -120,8 +128,8 @@ export function ProjectsSection() {
       </div>
 
       {/* Parchment map — scaled footprint; inside it the original 920-wide coordinate space, untouched */}
-      <div style={{ position: 'relative', zIndex: 2, width: MAP_W * MAP_SCALE, height: MAP_H * MAP_SCALE, maxWidth: '100%', margin: '0 auto' }}>
-      <div style={{ position: 'absolute', left: 0, top: 0, width: MAP_W, padding: `${MAP_PAD_TOP}px 0 ${MAP_PAD_BOTTOM}px`, transform: `scale(${MAP_SCALE})`, transformOrigin: 'top left' }}>
+      <div style={{ position: 'relative', zIndex: 2, width: MAP_W * mapScale, height: MAP_H * mapScale, maxWidth: '100%', margin: '0 auto' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: MAP_W, padding: `${MAP_PAD_TOP}px 0 ${MAP_PAD_BOTTOM}px`, transform: `scale(${mapScale})`, transformOrigin: 'top left' }}>
         <img
           src={mapBgImg}
           alt=""

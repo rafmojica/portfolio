@@ -40,7 +40,10 @@ const CLOSE_SPEED_MS = 42
 const STAGE_W = 800
 const STAGE_H = 680
 const STAGE_SHIFT = 70
-const STAGE_SCALE = 0.7
+
+// Scale grows with viewport so the chest reads well at 1080p–4K.
+// Min 0.75 (small screens), max 0.9 (large monitors). Kicks in above ~1600px CSS viewport.
+const calcStageScale = () => Math.min(0.9, Math.max(0.75, window.innerWidth / 2133))
 
 // x/y are the landing spots (top-left of each 92px hit box), two rows above the chest
 const TECHS: { name: string; slug: string; aura: 'gold' | 'blue' | null; x: number; y: number }[] = [
@@ -65,6 +68,13 @@ export function TechStackSection({ autoOpen = false, openSpeedMs = 70 }: { autoO
   const [playing, setPlaying] = useState(false)
   const [iconsOut, setIconsOut] = useState(false)
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
+
+  const [stageScale, setStageScale] = useState(calcStageScale)
+  useEffect(() => {
+    const onResize = () => setStageScale(calcStageScale())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   const stageRef = useRef<HTMLDivElement>(null)
   const timerRef = useRef<number | undefined>(undefined)
@@ -205,15 +215,15 @@ export function TechStackSection({ autoOpen = false, openSpeedMs = 70 }: { autoO
         style={{
           position: 'relative',
           zIndex: 2,
-          width: STAGE_W * STAGE_SCALE,
-          height: STAGE_H * STAGE_SCALE,
+          width: STAGE_W * stageScale,
+          height: STAGE_H * stageScale,
           maxWidth: '100%',
           margin: '0 auto',
           cursor: 'pointer',
           userSelect: 'none',
         }}
       >
-      <div style={{ position: 'absolute', left: 0, top: 0, width: STAGE_W, height: STAGE_H, transform: `scale(${STAGE_SCALE})`, transformOrigin: 'top left' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: STAGE_W, height: STAGE_H, transform: `scale(${stageScale})`, transformOrigin: 'top left' }}>
       <div style={{ position: 'absolute', left: 0, top: -STAGE_SHIFT, width: '100%', height: '100%' }}>
 
         {/* Banner hint — outer wrapper fades, inner wrapper bobs (opacity and animation must stay on separate elements) */}

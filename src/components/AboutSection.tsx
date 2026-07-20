@@ -1,4 +1,3 @@
-import topBarImg from '../assets/top_bar.png'
 import rewardPanelImg from '../assets/reward_panel.png'
 import relicFrameImg from '../assets/relic_frame.png'
 import iconMapImg from '../assets/icon_map.png'
@@ -49,7 +48,7 @@ export function AboutSection() {
       <div style={{
         position: 'relative',
         zIndex: 3,
-        maxWidth: 1160,
+        maxWidth: 1380,
         margin: '0 auto',
         padding: '84px 40px 16px',
       }}>
@@ -208,24 +207,6 @@ export function AboutSection() {
         </div>
       </div>
 
-      {/* Bottom ground strip — top_bar flipped vertically */}
-      <img
-        src={topBarImg}
-        alt=""
-        draggable={false}
-        style={{
-          position: 'absolute',
-          left: 0,
-          bottom: 0,
-          width: '100%',
-          height: 30,
-          objectFit: 'fill',
-          transform: 'scaleY(-1)',
-          pointerEvents: 'none',
-          userSelect: 'none',
-          zIndex: 2,
-        }}
-      />
     </div>
   )
 }
