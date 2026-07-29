@@ -13,6 +13,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/rafa-mojica/'
 export function ContactSection() {
   return (
     <div
+      className="contact-section"
       style={{
         position: 'relative',
         width: '100%',
@@ -50,7 +51,7 @@ export function ContactSection() {
           position: 'absolute',
           left: '50%',
           top: '74%',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate(-50%, -50%) scale(var(--contact-scale, 1))',
           zIndex: 1,
           pointerEvents: 'none',
         }}
@@ -254,6 +255,7 @@ export function ContactSection() {
           gap: '72px',
           flexWrap: 'wrap',
           justifyContent: 'center',
+          transform: 'scale(var(--contact-scale, 1))',
         }}
       >
         {/* Contact card */}

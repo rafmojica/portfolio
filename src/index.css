@@ -196,3 +196,13 @@ h1, h2, h3 {
   border-color: #3f9be8 !important;
   box-shadow: 0 0 22px rgba(63,155,232,.45), 0 0 46px rgba(63,155,232,.2);
 }
+
+/* Shrinks the campfire scene + option cards on smaller windows (e.g. MacBook Air / 1080p)
+   without touching the background, which stays cover-fit at full size regardless. */
+.contact-section { --contact-scale: 1; }
+@media (max-width: 2200px) {
+  .contact-section { --contact-scale: 0.85; }
+}
+@media (max-width: 1600px) {
+  .contact-section { --contact-scale: 0.7; }
+}
