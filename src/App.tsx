@@ -6,8 +6,43 @@ import { ProjectsSection } from "./components/ProjectsSection";
 import { TechStackSection } from "./components/TechStackSection";
 import { WaveDivider } from "./components/WaveDivider";
 import { ContactSection } from "./components/ContactSection";
+import { MobileNav } from "./components/MobileNav";
+import { HomeMobile } from "./components/HomeMobile";
+import { AboutMobile } from "./components/AboutMobile";
+import { ProjectsMobile } from "./components/ProjectsMobile";
+import { ContactMobile } from "./components/ContactMobile";
+import { useIsMobile } from "./hooks/useIsMobile";
 
 function App() {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <>
+        <MobileNav />
+        <section id="home">
+          <HomeMobile />
+        </section>
+        <WaveDivider bg="#08080b" fill={{ from: "#203c46", to: "#162a32" }} />
+        <section id="about">
+          <AboutMobile />
+        </section>
+        <WaveDivider bg="radial-gradient(125% 120% at 50% 0%, #060b0e, #091015 62%)" fill="#121217" />
+        <section id="tech">
+          <TechStackSection autoOpen />
+        </section>
+        <WaveDivider bg="#08080b" fill="#121217" />
+        <section id="projects">
+          <ProjectsMobile />
+        </section>
+        <WaveDivider bg="#08080b" fill="#050604" />
+        <section id="contact">
+          <ContactMobile />
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />

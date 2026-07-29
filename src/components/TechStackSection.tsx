@@ -42,8 +42,14 @@ const STAGE_H = 680
 const STAGE_SHIFT = 70
 
 // Scale grows with viewport so the chest reads well at 1080p–4K.
-// Min 0.75 (small screens), max 0.9 (large monitors). Kicks in above ~1600px CSS viewport.
-const calcStageScale = () => Math.min(0.9, Math.max(0.75, window.innerWidth / 2133))
+// Phones (≤768px) instead shrink the 800px stage to fit the narrow column; desktop keeps
+// the 0.75–0.9 range that reads well at 1080p–4K.
+const calcStageScale = () => {
+  const w = window.innerWidth
+  // Fit the 800px stage inside the column (section pads 24px each side); leave a little slack.
+  if (w <= 768) return Math.min(0.6, Math.max(0.36, (w - 56) / 800))
+  return Math.min(0.9, Math.max(0.75, w / 2133))
+}
 
 // x/y are the landing spots (top-left of each 92px hit box), two rows above the chest
 const TECHS: { name: string; slug: string; aura: 'gold' | 'blue' | null; x: number; y: number }[] = [
