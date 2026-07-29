@@ -110,6 +110,18 @@ h1, h2, h3 {
   100% { opacity: 0; transform: translate(-50%, -50%); }
 }
 
+/* Slay-the-Spire gem pulse for the wave divider's green accent dots */
+@keyframes waveDotPulse {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(168,239,62,.7)); }
+  50%      { filter: drop-shadow(0 0 7px rgba(168,239,62,1)); }
+}
+.wave-dot {
+  animation: waveDotPulse 3s ease-in-out infinite;
+}
+.wave-dot-2 {
+  animation-delay: 1.4s;
+}
+
 @keyframes rareGlow {
   0%, 100% { filter: drop-shadow(0 0 5px rgba(255,205,90,.8)) drop-shadow(0 0 16px rgba(255,180,40,.5)); }
   50%      { filter: drop-shadow(0 0 11px rgba(255,220,120,1)) drop-shadow(0 0 28px rgba(255,190,60,.75)); }

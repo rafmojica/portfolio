@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="140" viewBox="0 0 1200 140" preserveAspectRatio="none" role="img" aria-label="Section divider wave">
+  <path d="M0 70 C150 20 300 20 450 60 C600 100 750 110 900 70 C1020 38 1120 40 1200 64 L1200 140 L0 140 Z" fill="#241a2e" opacity=".8"></path>
+  <path d="M0 92 C160 50 320 46 480 82 C640 118 800 120 960 88 C1060 68 1140 68 1200 84 L1200 140 L0 140 Z" fill="#141019"></path>
+  <path d="M0 108 C180 76 360 74 540 100 C720 126 900 128 1060 106 C1120 98 1170 98 1200 104 L1200 140 L0 140 Z" fill="#0b0b0e"></path>
+  <path d="M0 92 C160 50 320 46 480 82 C640 118 800 120 960 88 C1060 68 1140 68 1200 84" fill="none" stroke="#e2c665" stroke-width="2.5" opacity=".9"></path>
+  <circle cx="480" cy="82" r="4" fill="#a8ef3e"></circle>
+  <circle cx="960" cy="88" r="4" fill="#a8ef3e"></circle>
+</svg>
