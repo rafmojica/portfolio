@@ -25,16 +25,16 @@ export function HeroBackdrop() {
         }}
       />
 
-      {/* Hero row */}
+      {/* Hero row — collapses to a column once the name scroll and photo frame
+          no longer both fit at their fixed widths (see .hero-row media query) */}
       <div
+        className="hero-row"
         style={{
           position: 'relative',
           zIndex: 2,
           minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 48,
           maxWidth: 1180,
           margin: '0 auto',
           padding: '124px 56px 380px',
@@ -42,7 +42,7 @@ export function HeroBackdrop() {
         }}
       >
         {/* Left: name on scroll */}
-        <div style={{ position: 'relative', flex: '0 0 auto', width: 560 }}>
+        <div className="hero-name-card" style={{ position: 'relative', flex: '0 0 auto', width: 560 }}>
           <img
             src={scrollBg}
             alt=""

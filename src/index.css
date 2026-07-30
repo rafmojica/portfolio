@@ -28,6 +28,24 @@ body {
   min-height: 100vh;
 }
 
+.hero-row {
+  gap: 48px;
+  justify-content: space-between;
+}
+
+@media (max-width: 1120px) {
+  .hero-row {
+    flex-direction: column;
+    justify-content: center;
+    /* The name-scroll graphic is fixed at 600px tall and centered over its
+       (shorter, font-size-driven) text box, so it overflows past the box's
+       own bottom edge by up to ~120px. Stacking needs a bigger gap than row
+       mode so that overflow clears the photo frame below instead of the
+       two boxes just touching. */
+    gap: 150px;
+  }
+}
+
 h1, h2, h3 {
   margin: 0;
 }
