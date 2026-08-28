@@ -440,7 +440,7 @@ export function AboutSection() {
                 color: "#cdbf9f",
               }}
             >
-              I treat every project like a fresh run up the Spire — pick up new
+              I treat every project like a fresh run up the Spire, picking up new
               tools as I find them, adapt to whatever the next floor throws my
               way, and keep climbing. Right now I'm deep in full-stack web
               development, turning rough ideas into things people can actually
