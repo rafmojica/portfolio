@@ -80,7 +80,7 @@ export function HomeMobile() {
             Aspiring Full-Stack Engineer
           </div>
           <p style={{ margin: '10px auto 0', maxWidth: 250, fontSize: 14, lineHeight: 1.55, color: '#433c5b', textWrap: 'pretty' as React.CSSProperties['textWrap'] }}>
-            I'm studying Electrical Engineering and Computer Sciences at UC&nbsp;Berkeley.
+            I'm studying Electrical Engineering and Computer Sciences at  <span className="ucb-highlight">UC&nbsp;Berkeley</span>.
           </p>
         </div>
       </div>

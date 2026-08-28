@@ -1,4 +1,5 @@
 import scrollBg from '../assets/scroll-bg.png'
+import rafa_hero from '../assets/rafa_hero.png'
 
 export function HeroBackdrop() {
   return (
@@ -107,7 +108,8 @@ export function HeroBackdrop() {
                 textWrap: 'pretty' as React.CSSProperties['textWrap'],
               }}
             >
-              I'm studying Electrical Engineering and Computer Sciences at UC&nbsp;Berkeley.
+              Electrical Engineering & Computer Sciences <br></br>at{' '}
+              <span className="ucb-highlight">UC&nbsp;Berkeley</span>
             </p>
           </div>
         </div>
@@ -123,24 +125,19 @@ export function HeroBackdrop() {
               boxShadow: '0 24px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05)',
             }}
           >
-            <div
+            <img
+              src={rafa_hero}
+              alt="Rafa Mojica"
+              draggable={false}
               style={{
+                display: 'block',
                 width: 380,
                 height: 300,
                 borderRadius: 10,
-                background: 'linear-gradient(135deg, #1a1a20, #111115)',
-                border: '1px dashed rgba(255,255,255,.08)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'rgba(255,255,255,.18)',
-                fontSize: 13,
-                fontFamily: "'Kreon', serif",
-                letterSpacing: '.5px',
+                objectFit: 'cover',
+                userSelect: 'none',
               }}
-            >
-              photo
-            </div>
+            />
           </div>
         </div>
       </div>

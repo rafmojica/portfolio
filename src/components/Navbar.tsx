@@ -53,26 +53,15 @@ export function Navbar() {
         <span style={{ font: "600 13px 'Cinzel', serif", letterSpacing: '1.2px', color: '#dfeaec', textShadow: '0 1px 2px rgba(0,0,0,.6)' }}>RAFA</span>
       </div>
 
-      <nav style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+      <nav style={{ display: 'flex', alignItems: 'center', gap: 24, alignSelf: 'center', marginBottom: 6 }}>
         {NAV_LINKS.map(link => {
           const isActive = activeHash === link.href
           return (
             <a
               key={link.href}
               href={link.href}
-              className={isActive ? undefined : 'nav-link'}
-              style={{
-                font: "600 11px 'Cinzel', serif",
-                letterSpacing: '1px',
-                color: isActive ? '#f3c45a' : '#cfe3e8',
-                textDecoration: 'none',
-                padding: '7px 14px',
-                border: isActive ? '1px solid rgba(243,196,90,.55)' : '1px solid rgba(150,190,200,.22)',
-                borderRadius: 4,
-                background: isActive ? 'rgba(243,196,90,.14)' : 'rgba(8,16,20,.45)',
-                textShadow: '0 1px 2px rgba(0,0,0,.6)',
-                boxShadow: isActive ? 'inset 0 1px 0 rgba(255,255,255,.06)' : 'none',
-              }}
+              aria-current={isActive ? 'page' : undefined}
+              className={`hud-nav-link${isActive ? ' is-active' : ''}`}
             >
               {link.label}
             </a>
