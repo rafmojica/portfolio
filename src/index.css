@@ -81,6 +81,16 @@ h1, h2, h3 {
   }
 }
 
+.ucb-plaque {
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+.ucb-plaque:hover {
+  background: rgba(0,50,98,.18) !important;
+  border-color: rgba(0,50,98,.34) !important;
+  color: #0a5a9c !important;
+  transform: translateY(-1px);
+}
+
 @keyframes aboutGlow {
   0%, 100% { opacity: .55; transform: translate(-50%, 0) scale(1); }
   50%       { opacity: .85; transform: translate(-50%, 0) scale(1.06); }

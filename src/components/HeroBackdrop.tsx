@@ -1,6 +1,21 @@
 import scrollBg from '../assets/scroll-bg.png'
 import rafa_hero from '../assets/rafa_hero.png'
 
+const metaLabelStyle = {
+  fontFamily: "'Cinzel', serif",
+  fontSize: 11,
+  fontWeight: 600,
+  letterSpacing: '2px',
+  textTransform: 'uppercase' as const,
+  color: '#4a4266',
+}
+
+const metaValueStyle = {
+  fontSize: 19,
+  lineHeight: 1.3,
+  color: '#433c5b',
+}
+
 export function HeroBackdrop() {
   return (
     <div
@@ -73,44 +88,81 @@ export function HeroBackdrop() {
                 margin: 0,
                 fontFamily: "'Cinzel', serif",
                 fontWeight: 700,
-                fontSize: 'clamp(38px, 5.4vw, 66px)',
-                lineHeight: 1.04,
+                fontSize: 'clamp(36px, 5vw, 60px)',
+                lineHeight: 1,
                 letterSpacing: '.5px',
                 background: 'linear-gradient(180deg, #4a4266 6%, #322c46 52%, #241c38 100%)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
-                filter: 'drop-shadow(0 1px 0 rgba(255,255,255,.5)) drop-shadow(0 3px 7px rgba(40,28,60,.28))',
+                filter: 'drop-shadow(0 1px 0 rgba(255,255,255,.55)) drop-shadow(0 3px 7px rgba(40,28,60,.28))',
               }}
             >
               Rafa&nbsp;Mojica
             </h1>
             <div
               style={{
-                marginTop: 22,
+                marginTop: 14,
                 fontFamily: "'Cinzel', serif",
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: 600,
-                letterSpacing: '2.5px',
+                letterSpacing: '3px',
                 textTransform: 'uppercase',
-                color: '#6c6685',
+                color: '#5f5980',
               }}
             >
               Aspiring Full-Stack Engineer
             </div>
-            <p
+            <div
               style={{
-                margin: '14px 0 0',
-                maxWidth: 400,
-                fontSize: 'clamp(16px, 1.8vw, 18px)',
-                lineHeight: 1.6,
-                color: '#433c5b',
-                textWrap: 'pretty' as React.CSSProperties['textWrap'],
+                marginTop: 26,
+                height: 1,
+                background: 'linear-gradient(90deg, rgba(90,82,120,.5), rgba(90,82,120,.12))',
+              }}
+            />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '84px minmax(0, 1fr)',
+                rowGap: 14,
+                columnGap: 20,
+                alignItems: 'baseline',
+                marginTop: 22,
               }}
             >
-              Electrical Engineering & Computer Sciences <br></br>at{' '}
-              <span className="ucb-highlight">UC&nbsp;Berkeley</span>
-            </p>
+              <span style={metaLabelStyle}>Study</span>
+              <span style={metaValueStyle}>Electrical Engineering &amp; Computer Sciences</span>
+
+              <span style={metaLabelStyle}>School</span>
+              <a
+                href="https://www.berkeley.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ucb-plaque"
+                style={{
+                  justifySelf: 'start',
+                  display: 'inline-block',
+                  fontFamily: "'Cinzel', serif",
+                  fontWeight: 700,
+                  fontSize: 20,
+                  letterSpacing: '.6px',
+                  color: '#003262',
+                  background: 'rgba(0,50,98,.10)',
+                  border: '1px solid rgba(0,50,98,.16)',
+                  borderRadius: 4,
+                  padding: '3px 10px',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,.22)',
+                  textDecoration: 'none',
+                  pointerEvents: 'auto',
+                  cursor: 'pointer',
+                }}
+              >
+                UC&nbsp;Berkeley
+              </a>
+
+              <span style={metaLabelStyle}>Class of</span>
+              <span style={metaValueStyle}>2027</span>
+            </div>
           </div>
         </div>
 

@@ -36,28 +36,32 @@ interface Project {
 // TODO: replace lorem placeholders with real project data + screenshots
 const PROJECTS: Project[] = [
   {
-    floor: 'FLOOR 1 · MONSTER', name: 'Project One', blurb: 'Lorem ipsum dolor sit amet.',
+    floor: 'FLOOR 1 · MONSTER', name: 'Interactive Compendium', blurb: 'Search every item in Breath of the Wild.',
     x: 250, y: 640, dir: 'row', align: 'left',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco.',
-    tech: ['Lorem', 'Ipsum', 'Dolor'], repo: '#', demo: '#',
+    desc: 'Search and inspect through every single interactable found in the video game The Legend of Zelda: Breath of the Wild.',
+    tech: ['Lorem', 'Ipsum', 'Dolor'], repo: 'https://github.com/rafmojica/botw-compendium', demo: 'https://botw-compendium-two.vercel.app/',
+    screenshot: "./src/assets/proj1.png",
   },
   {
-    floor: 'FLOOR 2 · ELITE', name: 'Project Two', blurb: 'Consectetur adipiscing elit.',
+    floor: 'FLOOR 2 · ELITE', name: 'Student Social Platform', blurb: 'Create, read, update, delete.',
     x: 430, y: 450, dir: 'row-reverse', align: 'right',
-    desc: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
-    tech: ['Sit', 'Amet', 'Elit'], repo: '#', demo: '#',
+    desc: 'Create and browse posts from any Diablo Valley College student/professor.',
+    tech: ['React', 'Firebase', 'Tailwind'], repo: 'https://github.com/rafmojica/gdsc-freedom-wall', demo: 'https://gdsc-freedom-wall.vercel.app/',
+    screenshot: "./src/assets/proj2.png",
   },
   {
-    floor: 'FLOOR 3 · CAMPFIRE', name: 'Project Three', blurb: 'Sed do eiusmod tempor.',
+    floor: 'FLOOR 3 · CAMPFIRE', name: 'Cooking Assistant', blurb: 'Like having a personal chef.',
     x: 170, y: 260, dir: 'row', align: 'left',
-    desc: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
-    tech: ['Tempor', 'Magna'], repo: '#', demo: '#',
+    desc: 'Search and browse recipes, and have your own AI assistant teach you how to make it!',
+    tech: ['Tempor', 'Magna'], repo: 'https://github.com/sebastiansebs/MealPrep', demo: 'https://mealprep-hazel.vercel.app/',
+    screenshot: "./src/assets/proj3.png",
   },
   {
-    floor: 'BOSS · FLAGSHIP', name: 'Project Four', blurb: 'Magna aliqua ut enim.',
+    floor: 'BOSS · FLAGSHIP', name: 'PilotD', blurb: 'Letterboxd for TV shows!',
     x: 320, y: 82, dir: 'row', align: 'left',
-    desc: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    tech: ['Culpa', 'Officia', 'Anim'], repo: '#', demo: '#',
+    desc: 'Write reviews, create lists, and bond with other members on your favorite TV shows!',
+    tech: ['React Native', 'Expo', 'Firebase'], repo: 'https://github.com/rafmojica/PilotD', demo: 'https://github.com/rafmojica/PilotD',
+    screenshot: "./src/assets/proj4.png",
   },
 ]
 

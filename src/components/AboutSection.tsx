@@ -430,8 +430,9 @@ export function AboutSection() {
                 color: "#e7dcc4",
               }}
             >
-              I'm Rafael, but please call me Rafa. I'm a junior constantly
-              seeking opportunities to learn and grow as a person. 
+              I'm Rafael but please call me Rafa.
+              Born and raised in the Philippines, I moved to California for college after getting my green card. 
+              I'm a junior constantly seeking opportunities to learn and grow as a person. 
             </p>
             <p
               style={{
