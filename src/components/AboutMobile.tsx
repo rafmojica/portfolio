@@ -1,4 +1,3 @@
-import topBarImg from '../assets/top_bar.png'
 import rewardPanelImg from '../assets/reward_panel.png'
 import relicFrameImg from '../assets/relic_frame.png'
 import iconMapImg from '../assets/icon_map.png'
