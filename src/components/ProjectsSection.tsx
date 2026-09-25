@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react'
 import mapBgImg from '../assets/map_bg.png'
 import markerImg from '../assets/marker.png'
 import popupImg from '../assets/popup.png'
+import proj1 from '../assets/proj1.png'
+import proj2 from '../assets/proj2.png'
+import proj3 from '../assets/proj3.png'
+import proj4 from '../assets/proj4.png'
 
 const GLOW_BOSS = true
 const SHOW_MARKER = true
@@ -39,29 +43,29 @@ const PROJECTS: Project[] = [
     floor: 'FLOOR 1 · MONSTER', name: 'Interactive Compendium', blurb: 'Search every item in Breath of the Wild.',
     x: 250, y: 640, dir: 'row', align: 'left',
     desc: 'Search and inspect through every single interactable found in the video game The Legend of Zelda: Breath of the Wild.',
-    tech: ['Lorem', 'Ipsum', 'Dolor'], repo: 'https://github.com/rafmojica/botw-compendium', demo: 'https://botw-compendium-two.vercel.app/',
-    screenshot: "./src/assets/proj1.png",
+    tech: ['React', 'Tailwind'], repo: 'https://github.com/rafmojica/botw-compendium', demo: 'https://botw-compendium-two.vercel.app/',
+    screenshot: proj1,
   },
   {
     floor: 'FLOOR 2 · ELITE', name: 'Student Social Platform', blurb: 'Create, read, update, delete.',
     x: 430, y: 450, dir: 'row-reverse', align: 'right',
     desc: 'Create and browse posts from any Diablo Valley College student/professor.',
-    tech: ['React', 'Firebase', 'Tailwind'], repo: 'https://github.com/rafmojica/gdsc-freedom-wall', demo: 'https://gdsc-freedom-wall.vercel.app/',
-    screenshot: "./src/assets/proj2.png",
+    tech: ['Next.js', 'Firebase', 'Firestore', 'Tailwind'], repo: 'https://github.com/rafmojica/gdsc-freedom-wall', demo: 'https://gdsc-freedom-wall.vercel.app/',
+    screenshot: proj2,
   },
   {
     floor: 'FLOOR 3 · CAMPFIRE', name: 'Cooking Assistant', blurb: 'Like having a personal chef.',
     x: 170, y: 260, dir: 'row', align: 'left',
     desc: 'Search and browse recipes, and have your own AI assistant teach you how to make it!',
-    tech: ['Tempor', 'Magna'], repo: 'https://github.com/sebastiansebs/MealPrep', demo: 'https://mealprep-hazel.vercel.app/',
-    screenshot: "./src/assets/proj3.png",
+    tech: ['React', 'Firebase', 'Groq LPU', 'Cartesia', 'Framer Motion', 'Tailwind'], repo: 'https://github.com/sebastiansebs/MealPrep', demo: 'https://mealprep-hazel.vercel.app/',
+    screenshot: proj3,
   },
   {
     floor: 'BOSS · FLAGSHIP', name: 'PilotD', blurb: 'Letterboxd for TV shows!',
     x: 320, y: 82, dir: 'row', align: 'left',
     desc: 'Write reviews, create lists, and bond with other members on your favorite TV shows!',
     tech: ['React Native', 'Expo', 'Firebase'], repo: 'https://github.com/rafmojica/PilotD', demo: 'https://github.com/rafmojica/PilotD',
-    screenshot: "./src/assets/proj4.png",
+    screenshot: proj4,
   },
 ]
 
