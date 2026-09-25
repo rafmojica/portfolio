@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import topBarImg from '../assets/top_bar.png'
 import charBackdropImg from '../assets/char_backdrop.png'
+import miniTent from '../assets/miniature_tent.png'
 
 const NAV_LINKS = [
   { label: 'Home',       href: '#home' },
@@ -48,7 +49,7 @@ export function Navbar() {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <span style={{ font: "700 14px 'Cinzel', serif", color: '#cfe3e8', letterSpacing: '.5px', textShadow: '0 1px 2px rgba(0,0,0,.7)' }}>RM</span>
+          <img src={miniTent} alt="" style={{ width: 26, height: 26, objectFit: 'contain' }} />
         </div>
         <span style={{ font: "600 13px 'Cinzel', serif", letterSpacing: '1.2px', color: '#dfeaec', textShadow: '0 1px 2px rgba(0,0,0,.6)' }}>RAFA</span>
       </div>
